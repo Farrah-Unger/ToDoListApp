@@ -21,8 +21,13 @@ router.post('/tasks', async (req, res) => {
     const savedTask = await newTask.save(); 
     res.status(201).json(savedTask); 
   } catch (error) {
-    console.error('Error:', error); 
-    res.status(500).json({ error: 'Internal server error' }); 
+    if (error.code === 11000 && error.keyPattern && error.keyValue) {
+      console.error('Task with taskId already exists:', error.keyValue.taskId);
+      res.status(400).json({ error: 'Task with taskId already exists' });
+    } else {
+      console.error('Error:', error); 
+      res.status(500).json({ error: 'Internal server error' }); 
+    }
   }
 });
 
@@ -50,5 +55,6 @@ router.delete('/tasks/:id', (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     });
 });
+
 
 module.exports = router;

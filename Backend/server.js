@@ -1,9 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('./db'); 
 const taskRoutes = require('./taskRoutes'); 
-require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
