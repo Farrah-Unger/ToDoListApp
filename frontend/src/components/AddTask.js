@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import axios from 'axios';
 
 function AddTask({ refreshTasks }) {
@@ -6,24 +7,29 @@ function AddTask({ refreshTasks }) {
   const [completed, setCompleted] = useState(false);
 
   const handleAddTask = () => {
+    if (!title.trim()) {
+      alert('Task title cannot be empty');
+      return;
+    }
+
     const newTask = { title, completed };
-    axios.post('http://localhost:5000/tasks', newTask) // Adjust the API endpoint
+    axios.post('http://localhost:5000/tasks', newTask) 
       .then((response) => {
-        // Handle the response as needed
         refreshTasks();
       })
       .catch((error) => {
         console.error('Error adding task: ', error);
       });
   }
+
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       handleAddTask();
     }
   };
-  // Render the form and input elements
+
   return (
-    <div>
+    <div className="add-task-container">
       <h2>Add a New Task</h2>
       <form>
         <input
