@@ -50,5 +50,41 @@ MONGO_URI=mongodb+srv://<username>:<password>@<cluster-url>/<database-name>?retr
 Replace `<username>`, `<password>`, `<cluster-url>`, and `<database-name> with your MongoDB Atlas credentials`
 ```
 npm run start
+```
+## Structure
+```
+📦 project-name
+ ┣ 📂 Backend
+ ┃ ┣ 📜 server.js
+ ┃ ┣ 📜 db.js
+ ┃ ┣ 📂 models
+ ┃ ┃ ┗ 📜 task.js
+ ┃ ┃ 📜 taskRoutes.js
+ ┃ ┗ 📜 .env
+ ┃ ┗ 📜 .gitignore
+ ┣ 📂 frontend
+ ┃ ┣ 📂 public
+ ┃ ┃ ┣ 📜 index.html
+ ┃ ┣ 📂 src
+ ┃ ┃ ┣ 📂 components
+ ┃ ┃ ┃ ┗📜 AddTasks.js
+ ┃ ┃ ┃ ┗📜 EditModal.js
+ ┃ ┃ ┃ ┗📜 ToDoList.js
+ ┃ ┃ ┣ 📜 App.js
+ ┃ ┃ ┗ 📜 index.js
+ ┃ ┗ 📜 package.json
+ ┣ 📜 README.md
+```
+## Showcase
 
+### Modal Editing
 
+We've implemented a modal component for editing tasks, providing a smooth and distraction-free editing experience. Easily update task details with just a few clicks.
+
+```const EditModal = ({ isOpen, closeModal, handleEditTask }) => {
+  const [newTitle, setNewTitle] = useState('');
+
+  const handleSave = () => {
+    handleEditTask(newTitle);
+    closeModal();
+  };```
